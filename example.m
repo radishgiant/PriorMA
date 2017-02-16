@@ -1,0 +1,21 @@
+clear all
+load('qingdaohyper.mat')
+X1=double(qingdao11_03)';
+X2=double(qingdao11_05)';
+X1=[X1(1:46,:);X1(55:70,:);X1(75:92,:);X1(107:137,:);X1(160:193,:)];
+X2=[X2(1:46,:);X2(55:70,:);X2(75:92,:);X2(107:137,:);X2(160:193,:)];
+X1=Normalization(X1',1);
+X2=Normalization(X2',1);
+truthmap=qingdao14_truthmap03;
+truthmap2=qingdao14_truthmap05;
+par.dims=60;
+par.n=5;
+par.delta=2;
+par.k=15;
+par.k_maj=3;
+par.a=0
+par.spa_weight=25;
+par.band_num=60;
+par.weightmethod='spe';
+graph='01';
+[predYen,result,varargout]=prior_MA(X1,X2,truthmap,truthmap2,par,graph,loc03,loc05);
